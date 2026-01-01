@@ -1,0 +1,295 @@
+<!-- Popular Repositories Section -->
+<section class="popular-repos">
+  <div class="section-header">
+    <h2>Popular repositories</h2>
+    <a (click)="onCustomizePins($event)" class="customize-link" style="cursor: pointer;">Customize your pins</a>
+  </div>
+  <div class="repos-grid">
+    <div class="repo-card" *ngFor="let repo of pinnedRepos">
+      <div class="repo-title-row">
+        <div class="repo-title">{{ repo.name }}</div>
+        <span class="repo-visibility-badge">{{ repo.isPrivate ? 'Private' : 'Public' }}</span>
+      </div>
+      <div class="repo-fork-info" *ngIf="repo.isFork && repo.parentNameWithOwner">
+        Forked from {{ repo.parentNameWithOwner }}
+      </div>
+      <div class="repo-desc">{{ repo.description }}</div>
+      <div class="repo-meta">
+        <span class="repo-lang" *ngIf="repo.language">
+          <span class="lang-dot" [style.background]="repo.languageColor"></span> {{ repo.language }}
+        </span>
+        <span class="repo-stars">★ {{ repo.stargazerCount }}</span>
+        <span class="repo-updated">Updated {{ repo.updatedAt | date:'mediumDate' }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contribution Section (GitHub-style split) -->
+<section class="contribution-section">
+  <div class="contribution-grid">
+    <!-- LEFT SIDE: Main Contribution Data -->
+    <div class="contribution-main">
+      <!-- 1. Summary and Year Dropdown (mobile) -->
+      <div class="contrib-summary-row">
+        <div class="contrib-summary">
+          {{ totalContributions | number }} contributions in {{ currentYear }}
+        </div>
+        <div class="year-dropdown-mobile-inline">
+          <button class="year-dropdown-btn" (click)="showYearDropdown = !showYearDropdown">
+            <span>{{ currentYear }}</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.646 6.646a.5.5 0 0 1 .708 0L8 9.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z" fill="#24292f"/>
+            </svg>
+          </button>
+          <ul class="year-dropdown-list" *ngIf="showYearDropdown">
+            <li *ngFor="let year of years" 
+                [class.selected]="year === currentYear" 
+                (click)="reloadForYear(year); showYearDropdown = false">
+              {{year}}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- 2. Contribution Heatmap + Activity Overview Card -->
+      <div class="contrib-heatmap-card">
+        <!-- B. Heatmap Body (labels + grid) -->
+        <div class="heatmap-body">
+          <div class="heatmap-labels-wrapper">
+            <div class="heatmap-labels">
+              <span>Mon</span>
+              <span>Wed</span>
+              <span>Fri</span>
+            </div>
+          </div>
+          <div class="heatmap-scrollable">
+            <!-- A. Months Row -->
+            <div class="months-row">
+              <span *ngFor="let month of ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']">{{month}}</span>
+            </div>
+              <div class="heatmap-grid">
+              <ng-container *ngFor="let week of weeks">
+                <ng-container *ngFor="let day of week.days">
+                  <div class="contribution-cell" [ngClass]="day.levelClass"></div>
+                </ng-container>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <!-- C. Footer Legend -->
+        <div class="heatmap-footer">
+          <a href="#" class="contrib-learn-link">Learn how we count contributions</a>
+          <div class="heatmap-legend">
+            <span>Less</span>
+            <span class="legend-box contribution-level-0"></span>
+            <span class="legend-box contribution-level-1"></span>
+            <span class="legend-box contribution-level-2"></span>
+            <span class="legend-box contribution-level-3"></span>
+            <span class="legend-box contribution-level-4"></span>
+            <span>More</span>
+          </div>
+        </div>
+        <!-- Divider -->
+        <div class="contrib-divider"></div>
+        <!-- D. Activity Overview (Spider Chart) -->
+        <div class="contrib-activity-overview">
+          <div class="activity-overview-left">
+            <div class="activity-title">Activity overview</div>
+            <!-- Contributed to section -->
+            <div class="activity-overview-card">
+              <div class="activity-card-content">
+                <!-- Left: Icon -->
+                <div class="activity-card-icon">
+                  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" class="octicon octicon-repo">
+                    <path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"></path>
+                  </svg>
+                </div>
+                <!-- Right: Text content -->
+                <div class="activity-card-text">
+                  <!-- Line 1: Heading -->
+                  <div class="activity-text-line activity-heading">Contributed to</div>
+                  <!-- Lines 2-4: Repos (strict one per line) -->
+                  <ng-container *ngIf="reposData && reposData.top && reposData.top.length > 0; else noContrib">
+                    <div *ngFor="let r of reposData.top" class="activity-text-line activity-repo-line">
+                      <a [href]="r.url" target="_blank" rel="noopener" class="activity-repo-link" [title]="r.nameWithOwner">{{ r.nameWithOwner }}</a>
+                    </div>
+                    <!-- Last line: Extra count (only if > 0) -->
+                    <div *ngIf="reposData.extraCount > 0" class="activity-text-line activity-extra-line">
+                      and {{ reposData.extraCount }} other {{ reposData.extraCount === 1 ? 'repository' : 'repositories' }}
+                    </div>
+                  </ng-container>
+                  <ng-template #noContrib>
+                    <div class="activity-text-line activity-none-line">No recent repository contributions</div>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="spider-chart-container" *ngIf="activityPct; else loadingChart">
+            <svg width="300" height="240" viewBox="0 40 300 200">
+              <!-- Axis lines -->
+              <g *ngFor="let axis of getSpiderData().axes">
+                <line 
+                  [attr.x1]="axis.x1" 
+                  [attr.y1]="axis.y1" 
+                  [attr.x2]="axis.x2" 
+                  [attr.y2]="axis.y2" 
+                  stroke="#2da44e" 
+                  stroke-width="2" 
+                  opacity="0.3" />
+              </g>
+              
+              <!-- Activity blob (filled polygon) -->
+              <path 
+                [attr.d]="buildSpiderPath()" 
+                fill="#40c463" 
+                stroke="#40c463" 
+                stroke-width="7" 
+                opacity="0.5" 
+                stroke-linejoin="round" />
+              
+              <!-- Data points -->
+              <g *ngFor="let point of getSpiderData().points">
+                <circle 
+                  [attr.cx]="point.x" 
+                  [attr.cy]="point.y" 
+                  r="3" 
+                  fill="white" 
+                  stroke="#2da44e" 
+                  stroke-width="2" />
+              </g>
+              
+              <!-- Percentage labels -->
+              <g *ngFor="let label of getSpiderData().labels">
+                <text 
+                  [attr.x]="label.x" 
+                  [attr.y]="label.y" 
+                  [attr.text-anchor]="label.anchor"
+                  font-size="11" 
+                  fill="#57606a">
+                  {{ label.text }}
+                </text>
+              </g>
+              
+              <!-- Category labels -->
+              <g *ngFor="let point of getSpiderData().points">
+                <text 
+                  [attr.x]="point.labelX" 
+                  [attr.y]="point.labelY" 
+                  [attr.text-anchor]="point.labelX === 98 ? 'middle' : (point.labelX < 98 ? 'end' : 'start')"
+                  font-size="11" 
+                  fill="#57606a">
+                  {{ point.label }}
+                </text>
+              </g>
+            </svg>
+          </div>
+          <ng-template #loadingChart>
+            <div class="spider-chart-placeholder">Loading activity data...</div>
+          </ng-template>
+        </div>
+      </div>
+      <!-- Section Title -->
+      <div class="contrib-activity-title">Contribution activity</div>
+      <!-- 3. Contribution Activity Timeline (separate card below) -->
+      <div class="contrib-activity-card">
+        <div class="activity-month-block">
+          <div class="activity-month-header">December 2025</div>
+          <div class="activity-timeline">
+            <div class="activity-row TimelineItem">
+              <span class="activity-icon">
+                <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-lock">
+                  <path d="M4 4a4 4 0 0 1 8 0v2h.25c.966 0 1.75.784 1.75 1.75v5.5A1.75 1.75 0 0 1 12.25 15h-8.5A1.75 1.75 0 0 1 2 13.25v-5.5C2 6.784 2.784 6 3.75 6H4Zm8.25 3.5h-8.5a.25.25 0 0 0-.25.25v5.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-5.5a.25.25 0 0 0-.25-.25ZM10.5 6V4a2.5 2.5 0 1 0-5 0v2Z"></path>
+                </svg>
+              </span>
+              <span class="activity-desc">238 contributions in private repositories</span>
+              <span class="activity-date-range">Dec 1 – Dec 30</span>
+            </div>
+          </div>
+        </div>
+        <div class="activity-month-block">
+          <div class="activity-month-header">November 2025</div>
+          <div class="activity-timeline">
+            <div class="activity-row TimelineItem">
+              <span class="activity-icon">
+                <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-lock">
+                  <path d="M4 4a4 4 0 0 1 8 0v2h.25c.966 0 1.75.784 1.75 1.75v5.5A1.75 1.75 0 0 1 12.25 15h-8.5A1.75 1.75 0 0 1 2 13.25v-5.5C2 6.784 2.784 6 3.75 6H4Zm8.25 3.5h-8.5a.25.25 0 0 0-.25.25v5.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-5.5a.25.25 0 0 0-.25-.25ZM10.5 6V4a2.5 2.5 0 1 0-5 0v2Z"></path>
+                </svg>
+              </span>
+              <span class="activity-desc">223 contributions in private repositories</span>
+              <span class="activity-date-range">Nov 1 – Nov 29</span>
+            </div>
+          </div>
+        </div>
+        <button class="show-more-btn">Show more activity</button>
+      </div>
+      <!-- 4. Show More Activity Button -->
+      <!-- <button class="show-more-btn">Show more activity</button> -->
+    </div>
+      <!-- RIGHT SIDE: Years Navigation (desktop) -->
+      <aside class="year-navigation">
+        <ul>
+          <li *ngFor="let year of years" 
+              class="year-item" 
+              [class.active]="year === currentYear" 
+              (click)="reloadForYear(year)">
+            {{year}}
+          </li>
+        </ul>
+      </aside>
+      <!-- Year Dropdown (mobile) -->
+      <div class="year-dropdown-mobile">
+        <!-- <button class="year-dropdown-btn" (click)="showYearDropdown = !showYearDropdown">
+          <span>{{ currentYear }}</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.646 6.646a.5.5 0 0 1 .708 0L8 9.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z" fill="#24292f"/>
+          </svg>
+        </button> -->
+        <ul class="year-dropdown-list" *ngIf="showYearDropdown">
+          <li *ngFor="let year of years" 
+              [class.selected]="year === currentYear" 
+              (click)="reloadForYear(year); showYearDropdown = false">
+            {{year}}
+          </li>
+        </ul>
+      </div>
+  </div>
+</section>
+
+<!-- Activity Overview Section
+<section class="activity-overview">
+  <div class="section-header">
+    <h2>Activity overview</h2>
+  </div>
+  <ul class="activity-list">
+    <li>Created 10 repositories</li>
+    <li>Reviewed 25 pull requests</li>
+    <li>Opened 15 issues</li>
+    <li>Merged 8 pull requests</li>
+  </ul>
+</section>
+
+<!-- Contribution Activity Feed Section
+<section class="contribution-feed">
+  <div class="section-header">
+    <h2>Contribution activity</h2>
+  </div>
+  <div class="activity-feed-list">
+    <div class="activity-month">
+      <div class="month-label">December 2025</div>
+      <ul>
+        <li>Committed to repo-name-1</li>
+        <li>Opened issue in repo-name-2</li>
+        <li>Merged PR in repo-name-3</li>
+      </ul>
+    </div>
+    <div class="activity-month">
+      <div class="month-label">November 2025</div>
+      <ul>
+        <li>Reviewed PR in repo-name-4</li>
+        <li>Created repo repo-name-5</li>
+      </ul>
+    </div>
+  </div>
+  <button class="show-more-btn">Show more activity</button> 
+</section>-->

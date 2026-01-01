@@ -1,0 +1,617 @@
+.header-right .dropdown > .icon-btn:hover,
+.header-right .dropdown > .icon-btn:focus-visible,
+.header-right .dropdown.open > .icon-btn,
+.header-right .copilot-dropdown > .icon-btn:hover,
+.header-right .copilot-dropdown > .icon-btn:focus-visible,
+.header-right .copilot-dropdown.open > .icon-btn {
+  background: #f3f4f6;
+  border: 1.5px solid #0969da;
+  color: #24292f;
+  outline: none;
+}
+/* Wrapper for search bar with icon */
+.search-bar-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 16px;
+}
+
+.search-bar-icon {
+  position: absolute;
+  left: 12px;
+  z-index: 2;
+  fill: #656d76;
+  pointer-events: none;
+}
+
+.search-bar-wrapper .search-bar {
+  padding-left: 36px;
+  margin-right: 0;
+}
+/* GitHub-style split button group */
+.split-btn {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  border: 1.5px solid #30363d;
+  border-radius: 6px;
+  background: #161b22;
+  overflow: hidden;
+}
+
+.split-main,
+.split-caret {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 32px;
+  padding: 0 12px;
+  background: none;
+  border: none;
+  color: #c9d1d9;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.split-caret {
+  border-left: 1.5px solid #30363d;
+  padding: 0 8px;
+}
+
+.split-main {
+  border-radius: 6px 0 0 6px;
+}
+.split-caret {
+  border-radius: 0 6px 6px 0;
+}
+
+.split-main:hover,
+.split-caret:hover,
+.split-main:focus-visible,
+.split-caret:focus-visible {
+  background: #21262d;
+  color: #fff;
+  outline: none;
+}
+
+/* Icon button style for .icon-btn */
+.icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: #161b22;
+  border: 1.5px solid #30363d;
+  border-radius: 6px;
+  color: #c9d1d9;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  padding: 0;
+}
+.icon-btn:hover,
+.icon-btn:focus-visible {
+  background: #21262d;
+  color: #fff;
+  outline: none;
+}
+/* Dropdown button (Copilot/Create) improved styles to match GitHub */
+.header-right .dropdown > .icon-btn,
+.header-right .copilot-dropdown > .icon-btn {
+  background: #ffffff;
+  border: 1px solid #d1d5da;
+  margin: 0 4px;
+  position: relative;
+  min-width: 50px;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.375rem;
+  transition: background 0.15s, border 0.15s;
+  padding: -1px 8px -1px 8px;
+  font-size: 14px;
+  gap: 3px;
+}
+.header-right .dropdown > .icon-btn .caret,
+.header-right .copilot-dropdown > .icon-btn .caret {
+  margin-left: 6px;
+  fill: #656d76;
+  vertical-align: middle;
+}
+.header-right .dropdown.open > .icon-btn,
+.header-right .copilot-dropdown.open > .icon-btn {
+  background: #eaecef;
+  border-color: #0969da;
+}
+.header-right .dropdown > .icon-btn:focus,
+.header-right .copilot-dropdown > .icon-btn:focus {
+  outline: 1.5px solid #0969da;
+}
+
+/* Remove divider for dropdown buttons */
+.header-right .dropdown > .icon-btn:first-child:after,
+.header-right .copilot-dropdown > .icon-btn:first-child:after {
+  display: none;
+}
+/* Copilot dropdown styles (reuse .dropdown styles) */
+.copilot-dropdown {
+  display: inline-block;
+  position: relative;
+  margin-right: 6px;
+}
+
+/* Vertical divider after copilot dropdown */
+/* .copilot-dropdown::after {
+  content: '';
+  display: inline-block;
+  border-right: 1px solid #d1d5da;
+  height: 22px;
+  position: absolute;
+  right: -3px;
+  top: 6px;
+} */
+/* Dropdown styles for Create button */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.create-btn {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.caret {
+  margin-left: 2px;
+  fill: #656d76;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  min-width: 180px;
+  background: #fff;
+  border: 1px solid #d1d5da;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(149, 157, 165, 0.2);
+  z-index: 1000;
+  padding: 8px 0;
+  margin: 0;
+  list-style: none;
+}
+
+.dropdown-menu li {
+  padding: 0;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 8px 20px;
+  color: #24292f;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.15s;
+}
+
+.dropdown-menu a:hover {
+  background: #f6f8fa;
+}
+
+.github-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f6f8fa;
+  padding: 0 24px;
+  height: 56px;
+  border-bottom: 1px solid #e1e4e8;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  z-index: 100;
+}
+
+.header-left,
+.header-center,
+.header-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0;
+}
+
+.menu-btn {
+  background: none;
+  border: 1px solid #d1d5da;
+  margin-right: 12px;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+.menu-btn:hover {
+  background: #eaecef;
+}
+
+.github-logo {
+  width: 32px;
+  height: 32px;
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.username {
+  font-weight: 600;
+  font-size: 16px;
+  color: #24292f;
+  /* margin-left: 4px; */
+}
+
+.username-link {
+  cursor: pointer;
+  transition: color 0.15s;
+  text-decoration: none;
+}
+
+.username-link:hover {
+  color: #0969da;
+}
+
+.header-center {
+  flex: 1;
+  justify-content: center;
+}
+
+.search-bar {
+  width: 260px;
+  height: 30.4px;
+  padding: 0px 12px;
+  border: 1px solid #d1d5da;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: border 0.15s;
+  margin-right: 16px;
+}
+.search-bar:focus {
+  border: 1.5px solid #0969da;
+}
+
+.header-right .icon-btn, .header-right .copilot-btn {
+  background: #fff;
+  border: 1px solid #d1d5da;
+  margin: 0 4px;
+  cursor: pointer;
+  position: relative;
+  width: 32px;
+  height: 32px;
+  border-radius: 0.375rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, border 0.15s;
+  padding: 0;
+}
+.header-right .icon-btn:hover, .header-right .copilot-btn:hover {
+  background: #f3f4f6;
+  border: 1.5px solid #0969da;
+}
+
+.header-right .icon-btn .octicon, .header-right .copilot-btn .octicon {
+  display: block;
+  fill: #656d76;
+}
+
+.profile-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-left: 4px;
+  border: 1px solid #d1d5da;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.unread-dot {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
+  background: #238636;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  display: inline-block;
+}
+
+/* Tooltip styles */
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #24292f;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 1000;
+}
+
+[data-tooltip]::before {
+  content: '';
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-bottom-color: #24292f;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 1000;
+}
+
+[data-tooltip]:hover::after,
+[data-tooltip]:hover::before {
+  opacity: 1;
+}
+
+/* Hide tooltip when dropdown is open */
+.dropdown.open[data-tooltip]::after,
+.dropdown.open[data-tooltip]::before,
+.copilot-dropdown.open[data-tooltip]::after,
+.copilot-dropdown.open[data-tooltip]::before {
+  opacity: 0 !important;
+}
+
+/* Create button special styling */
+.header-right .icon-btn:first-child {
+  background: #f6f8fa;
+  border: 1.5px solid #d1d5da;
+  margin-right: 10px;
+  position: relative;
+}
+.header-right .icon-btn:first-child:after {
+  content: '';
+  display: inline-block;
+  border-left: 1px solid #d1d5da;
+  height: 20px;
+  position: absolute;
+  right: -10px;
+  top: 8px;
+}
+
+
+
+@media (max-width: 900px) {
+  /* .search-bar {
+    width: 160px;
+  } */
+  /* .username {
+    display: none;
+  } */
+}
+
+
+/* --- Critical: prevent header from causing horizontal overflow --- */
+.github-header {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Make header areas shrink correctly */
+.header-left,
+.header-center,
+.header-right {
+  min-width: 0; /* allows flex children to shrink */
+}
+
+/* Search wrapper should be flexible */
+.search-bar-wrapper {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin-right: 4px; /* reduce default margin */
+}
+
+/* Search input should fill available space (not fixed width) */
+.search-bar-wrapper .search-bar {
+  width: 100%;
+  min-width: 0;
+}
+
+/* On mobile: tighten everything */
+@media (max-width: 768px) {
+  .github-header {
+    padding: 0 12px; /* was 24px */
+  }
+
+  /* Make center truly flexible */
+  .header-center {
+    flex: 1 1 auto;
+    justify-content: center;
+    min-width: 0;
+  }
+
+  /* Search: flexible sizing */
+  .search-bar-wrapper {
+    width: 32px;
+    min-width: 32px;
+    max-width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin-right: 0;
+    position: relative;
+    background: #fff;
+    border: 1.5px solid #d1d5da;
+    border-radius: 6px;
+    box-sizing: border-box;
+  }
+
+  .search-bar {
+    display: none !important;
+  }
+  .search-bar-icon {
+    left: auto;
+    width: 17px;
+    height: 17px;
+    display: block !important;
+    margin: 0 auto;
+  }
+
+  /* Reduce right side spacing */
+  .header-right {
+    gap: 4px;
+  }
+
+  .header-right .icon-btn,
+  .header-right .copilot-btn {
+    margin: 0;        /* remove 0 6px */
+    width: 28px;      /* smaller on mobile */
+    height: 28px;
+  }
+
+  /* Split buttons compact */
+  .split-btn {
+    height: 28px;
+  }
+
+  .split-main,
+  .split-caret {
+    height: 28px;
+    min-width: 28px;
+    padding: 0 6px;
+    font-size: 14px;
+  }
+
+  /* Dropdown icon buttons: fix invalid negative padding + avoid min-width expansion */
+  .header-right .dropdown > .icon-btn,
+  .header-right .copilot-dropdown > .icon-btn {
+    min-width: 32px;  /* was 44px */
+    min-height: 28px;
+    padding: 0 6px;   /* FIX: remove negative padding */
+    margin-right: 0;
+  }
+}
+
+/* Hide non-essential header elements on mobile */
+@media (max-width: 768px) {
+  /* Hide all header-right buttons except notification and avatar */
+  .header-right .icon-btn,
+  .header-right .copilot-btn {
+    display: none !important;
+  }
+  .header-right .icon-btn.notification,
+  .header-right .icon-btn.profile-avatar {
+    display: flex !important;
+  }
+
+  /* Hide all dropdowns, split buttons, and extra controls */
+  .header-right .dropdown,
+  .header-right .copilot-dropdown,
+  .header-right .create-btn {
+    display: none !important;
+  }
+
+  /* Show only menu, logo, username, search icon, notification, and avatar */
+  .header-left .menu-btn,
+  .github-logo,
+  .username {
+    display: flex !important;
+  }
+
+  /* Hide header-center except search icon */
+  .header-center {
+    justify-content: flex-end;
+  }
+  .header-center .search-bar {
+    display: none !important;
+  }
+  .header-center .search-bar-icon {
+    display: flex !important;
+  }
+
+  /* Hide margin/padding for compactness */
+  .github-header {
+    padding: 0 8px;
+  }
+}
+@media (max-width: 768px) {
+  .search-bar-wrapper {
+    /* margin-right: 4px; */
+  }
+  .search-bar-wrapper .search-bar {
+    padding-left: 28px;
+    /* font-size: 0.95rem; */
+  }
+  .split-btn {
+    height: 28px;
+    font-size: 14px;
+  }
+  .split-main, .split-caret {
+    min-width: 28px;
+    padding: 0 6px;
+    font-size: 14px;
+  }
+  .username{
+    margin-left: -5px;
+    margin-right: 6px;
+    font-size: 14px;
+  }
+}
+
+/* --- Mobile-only: prevent header from causing horizontal overflow and allow left->right scroll --- */
+@media (max-width: 768px) {
+  .github-header {
+    overflow-x: auto;                  /* enable horizontal scroll if contents overflow */
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch; /* smooth swipe on mobile */
+    direction: ltr;                    /* ensure left-to-right scroll semantics */
+    scroll-behavior: smooth;           /* optional, smoother feel */
+  }
+
+  /* Optional: hide the scrollbar for a cleaner look (WebKit browsers) */
+  .github-header::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Ensure header sections don’t shrink away while scrolling */
+  .header-left,
+  .header-right {
+    flex: 0 0 auto;
+  }
+}

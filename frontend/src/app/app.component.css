@@ -1,0 +1,96 @@
+/* Root app styles */
+html, body, app-root {
+	height: 100%;
+	min-height: 100vh;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background: #f6f8fa;
+	min-height: 100vh;
+}
+
+app-root {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+/* Ensure router-outlet container takes up remaining space */
+app-root > router-outlet {
+	display: none; /* router-outlet itself doesn't render */
+}
+
+app-root > router-outlet + * {
+	flex: 1 0 auto; /* Allow the routed component to grow and take remaining space */
+}
+
+/* Main page background area (optional) */
+.profile-page {
+	background: #fff;
+	flex: 1 1 auto;
+	min-height: calc(100vh - 112px); /* adjust if your header+tabs height differs */
+	display: flex;
+	flex-direction: column;
+    /* max-width: 1216px; */
+}
+
+/* Container after tabs */
+.profile-container {
+	max-width: 1216px;       /* GitHub-like centered layout */
+	margin: 8px auto 0 auto;
+	padding: 32px;
+	display: grid;
+	grid-template-columns: 296px 1fr; /* left fixed, right flexible */
+	gap: 24px;
+	/* align-items: center; */
+}
+
+/* Left sidebar */
+
+
+/* Right content */
+.profile-main {
+	min-width: 0;
+	/* padding: 0 8px; */
+	box-sizing: border-box;
+	/* max-width: 896px !important; Force max width */
+	/* width: 100%; */
+}
+
+@media (max-width: 1024px) {
+	.profile-main {
+		padding: 0 4px;
+	}
+}
+
+/* Tablet: reduce sidebar width */
+@media (max-width: 1024px) {
+	.profile-container {
+		grid-template-columns: 260px 1fr;
+		gap: 20px;
+	}
+}
+
+/* Mobile: stack */
+@media (max-width: 768px) {
+    .profile-page{
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+	.profile-container {
+		grid-template-columns: 1fr;
+		max-width: 100%;
+		width: 100%;
+		margin: 0;
+		padding: 0 0 24px 0;
+	}
+	.profile-sidebar,
+	.profile-main {
+		width: 100%;
+		min-width: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+}

@@ -1,0 +1,134 @@
+
+/* Profile page tab bar styles (GitHub-like, merged with header) */
+.profile-tabs-bar {
+  background: #f6f8fa;               /* match header */
+  border-bottom: 1px solid #e1e4e8;  /* single divider */
+  padding: 0 24px;
+  margin: 0;
+  margin-top: -1px;                 /* removes visible seam */
+}
+
+.profile-tabs-list {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 48px;
+}
+
+.profile-tabs-list li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  font-size: 14px;
+  font-weight: 500;
+  color: #656d76;
+
+  padding: 0 14px 0 2px;
+  height: 48px;
+
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  background: none;
+
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+
+.profile-tabs-list li.selected {
+    color: #24292f;
+    border-bottom: 2.5px solid #fd8c73;
+    background: none;
+  }
+
+.profile-tabs-list li:hover {
+    color: #24292f;
+    /* border-bottom: 2.5px solid #fd8c73; */
+    background: none;
+}
+
+
+  /* color: #24292f; */
+  /* border-bottom-color : #fd8c73; */
+/* } */
+
+/* Remove margin from .tab-label, use gap on li instead */
+.tab-label {
+  margin: 0;
+}
+/* SVG icon alignment and spacing */
+.profile-tabs-list svg {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+  flex-shrink: 0;
+  fill: #656d76;
+  color: #656d76;
+  transition: fill 0.15s, color 0.15s;
+}
+.profile-tabs-list li.selected svg {
+  fill: #24292f;
+  color: #24292f;
+}
+
+
+.tab-badge {
+  background: #eaecef;
+  color: #24292f;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 2em;
+  padding: 2px 8px;
+  margin-left: 2px;
+  line-height: 1;
+  display: inline-block;
+}
+
+/* --- Prevent tabs from causing horizontal overflow --- */
+.profile-tabs-bar {
+  box-sizing: border-box;
+  width: 100%;
+  overflow-x: auto;                  /* ✅ allow horizontal scroll */
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch; /* ✅ smooth swipe on iOS */
+}
+
+/* Hide scrollbar (optional, but looks cleaner like GitHub) */
+.profile-tabs-bar::-webkit-scrollbar {
+  display: none;
+}
+.profile-tabs-bar {
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Keep list as a single scrollable row */
+.profile-tabs-list {
+  display: inline-flex;  /* ✅ important: size to content */
+  flex-wrap: nowrap;
+  white-space: nowrap;   /* ✅ prevent wrapping */
+  min-width: max-content;/* ✅ force scroll instead of squeezing */
+}
+
+/* Each tab should not shrink unpredictably */
+.profile-tabs-list li {
+  flex: 0 0 auto;        /* ✅ prevent shrinking */
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .profile-tabs-bar {
+    padding: 0 8px;
+  }
+  .profile-tabs-list {
+    height: 36px;
+    gap: 2px;
+  }
+  .profile-tabs-list li {
+    font-size: 12px;
+    padding: 0 8px 0 1px;
+    height: 36px;
+  }
+}
