@@ -1,6 +1,7 @@
 {
   "name": "github-profile-backend",
   "version": "1.0.0",
+  "type": "module",
   "description": "Backend API proxy for GitHub Profile Clone",
   "main": "server.js",
   "scripts": {
@@ -13,3 +14,4 @@
     "cors": "^2.8.5"
   }
 }
+
