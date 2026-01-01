@@ -5,6 +5,7 @@ import { UserService } from '../services/user.service';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 interface Repository {
   name: string;
@@ -129,7 +130,7 @@ export class SiteMenuComponent implements OnInit, OnDestroy {
 
   private loadRepositories(): void {
     // Try to fetch popular repositories
-    this.http.get<any>('http://localhost:3000/api/popular')
+    this.http.get<any>(${environment.apiUrl}/api/popular)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (data) => {
@@ -181,3 +182,4 @@ export class SiteMenuComponent implements OnInit, OnDestroy {
     });
   }
 }
+
