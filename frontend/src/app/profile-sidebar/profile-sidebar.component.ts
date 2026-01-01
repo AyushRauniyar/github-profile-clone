@@ -39,10 +39,11 @@ export class ProfileSidebarComponent implements OnInit, OnDestroy {
   fetchProfile() {
     this.loading = true;
     const params = new HttpParams().set('login', this.login);
-    this.http.get<{ profile: any }>(${environment.apiUrl}/api/profile, { params }).subscribe({
+    this.http.get<{ profile: any }>(`${environment.apiUrl}/api/profile`, { params }).subscribe({
       next: ({ profile }) => { this.profile = profile; this.loading = false; },
       error: (err) => { this.error = err?.message || 'Failed to load profile'; this.loading = false; }
     });
   }
 }
+
 
