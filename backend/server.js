@@ -12,13 +12,10 @@ const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
 // Enable CORS for Frontend
 app.use(cors({
-  origin: [
-    'http://localhost:4200',
-    'https://github-profile-frontend.vercel.app'
-  ],
-  credentials: true,
+  origin:'*',
+  credentials: false,
   methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization','X-Requested-With']
 }));
 
 app.get('/api/contributions', async (req, res) => {
@@ -562,3 +559,4 @@ process.on('uncaughtException', err => {
   process.exit(1);
 
 });
+
