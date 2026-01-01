@@ -1,6 +1,7 @@
 import express from 'express';
 import fetch from 'node-fetch';
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 dotenv.config();
 
@@ -9,12 +10,16 @@ const PORT = 3000;
 const GITHUB_API = 'https://api.github.com/graphql';
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
-// Enable CORS for Angular dev server
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
+// Enable CORS for Frontend
+app.use(cors({
+  origin: [
+    'http://localhost:4200',
+    'https://github-profile-frontend.vercel.app'
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 app.get('/api/contributions', async (req, res) => {
   const { login, from, to } = req.query;
@@ -555,4 +560,5 @@ process.on('unhandledRejection', (reason, promise) => {
 process.on('uncaughtException', err => {
   console.error('Uncaught Exception:', err);
   process.exit(1);
+
 });
