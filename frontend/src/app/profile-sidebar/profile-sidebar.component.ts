@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { UserService } from '../services/user.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-profile-sidebar',
@@ -38,9 +39,10 @@ export class ProfileSidebarComponent implements OnInit, OnDestroy {
   fetchProfile() {
     this.loading = true;
     const params = new HttpParams().set('login', this.login);
-    this.http.get<{ profile: any }>('http://localhost:3000/api/profile', { params }).subscribe({
+    this.http.get<{ profile: any }>(${environment.apiUrl}/api/profile, { params }).subscribe({
       next: ({ profile }) => { this.profile = profile; this.loading = false; },
       error: (err) => { this.error = err?.message || 'Failed to load profile'; this.loading = false; }
     });
   }
 }
+
