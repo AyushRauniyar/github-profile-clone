@@ -9,14 +9,14 @@ A fully functional, responsive GitHub profile page clone built with Angular 17, 
 ---
 
 ## 📋 Table of Contents
-- [Overview](#overview)
-- [Features Implemented](#features-implemented)
-- [Tech Stack](#tech-stack)
-- [API Integration vs Mock Data](#api-integration-vs-mock-data)
-- [Project Structure](#project-structure)
-- [Setup Instructions](#setup-instructions)
-- [Additional Features (Bonus)](#additional-features-bonus)
-- [Screenshots](#screenshots)
+- [Overview](#-overview)
+- [Features Implemented](#-features-implemented)
+- [Tech Stack](#-tech-stack)
+- [API Integration vs Mock Data](#-api-integration-vs-mock-data)
+- [Project Structure](#-project-structure)
+- [Setup Instructions](#-setup-instructions)
+- [Additional Features (Bonus)](#-additional-features-bonus)
+- [Screenshots](#-screenshots)
 
 ---
 
@@ -789,3 +789,4 @@ This project demonstrates:
 - **Pure CSS**: No UI frameworks, GitHub-accurate styling
 
 The implementation delivers a fully functional, production-ready GitHub profile clone with comprehensive API integration, modern development practices, and pixel-perfect design accuracy.
+
