@@ -484,7 +484,7 @@ The application is also deployed and accessible at:
 
 Beyond the assignment requirements, the following features were implemented:
 
-### 1. **Activity Overview Section**
+### 1. **Dynamic Activity Overview Section**
 - **Spider/Radar Chart**: SVG-based visualization of contribution types
 - **Dynamic Data**: Updates automatically when year changes
 - Activity mix percentage calculation with real-time updates
@@ -499,7 +499,7 @@ Beyond the assignment requirements, the following features were implemented:
 - Live count updates from GraphQL queries
 - Proper error handling with fallback values
 
-### 3. **Enhanced Repository Cards**
+### 3. **Dynamic Enhanced Repository Cards**
 - **Interactive Elements**:
   - Clickable repository names (open in new tab)
   - Clickable fork source links with underline styling
@@ -529,25 +529,7 @@ Beyond the assignment requirements, the following features were implemented:
 - Search bar with GitHub-style placeholder (UI complete)
 - Icon tray with notification indicators
 
-### 6. **Footer Component**
-- GitHub-authentic footer design with official logo
-- **Multi-column layout**: Responsive grid that stacks on mobile
-- Navigation links organized by category
-- Cookie management section
-- Copyright information with dynamic year calculation
-- **Sticky positioning**: Stays at bottom of viewport on short pages
-- Hover effects on links
-
-### 7. **State Management**
-- **RxJS-based reactive architecture**:
-  - BehaviorSubject for username sharing across components
-  - Observables for asynchronous data flow
-  - Proper cleanup with takeUntil pattern to prevent memory leaks
-- Centralized UserService for state management
-- MenuService for dropdown state coordination
-- Reactive updates across all components
-
-### 8. **Error Handling & User Experience**
+### 6. **Error Handling & User Experience**
 - Graceful error handling for API failures
 - Loading states for asynchronous operations
 - Console logging for debugging
@@ -555,21 +537,8 @@ Beyond the assignment requirements, the following features were implemented:
 - User-friendly error messages
 - Null/undefined safety checks throughout
 
-### 9. **Code Quality & Architecture**
-- **Component-based architecture**: Modular, reusable components
-- **Service layer**: Separation of concerns with dedicated services
-- **TypeScript interfaces**: Type safety for all data structures
-- **Environment configuration**: Separate dev/prod configurations
-- **Proxy configuration**: Development proxy for API calls
-- Clean, maintainable code with proper comments
-
-### 10. **Deployment Ready**
+### 7. **Deployment Ready**
 - **Separate frontend/backend structure**: Clean deployment architecture
-- **Environment variables**: Secure token management
-- **CORS configuration**: Proper cross-origin request handling
-- **Vercel configuration**: Optimized for serverless deployment
-- **ES Module support**: Modern JavaScript module system
-- Production build optimization
 
 ---
 
@@ -702,56 +671,6 @@ query ProfileCounts($login: String!) {
 
 ---
 
-## 📦 Dependencies
-
-### Frontend Dependencies
-```json
-{
-  "@angular/animations": "^17.3.0",
-  "@angular/common": "^17.3.0",
-  "@angular/compiler": "^17.3.0",
-  "@angular/core": "^17.3.0",
-  "@angular/forms": "^17.3.0",
-  "@angular/platform-browser": "^17.3.0",
-  "@angular/router": "^17.3.0",
-  "rxjs": "~7.8.0",
-  "tslib": "^2.3.0",
-  "zone.js": "~0.14.3"
-}
-```
-
-### Backend Dependencies
-```json
-{
-  "express": "^4.18.2",
-  "node-fetch": "^2.6.7",
-  "dotenv": "^16.0.3",
-  "cors": "^2.8.5"
-}
-```
-
----
-
-## 👨‍💻 Development Notes
-
-### Component Communication
-- Uses RxJS Observables for reactive data flow
-- BehaviorSubject for shared state (username)
-- Event emitters for child-to-parent communication
-
-### Routing Strategy
-- Dynamic username-based routing: `/:username`
-- Query parameters for tab navigation: `?tab=repositories`
-- Maintenance routing for under-development features
-
-### API Strategy
-- Node.js proxy server to avoid CORS issues
-- Token-based authentication with GitHub API
-- Error handling and logging at server level
-- Response caching with Cache-Control headers
-
----
-
 ## 📄 License
 
 This project is created as an assignment for UptimeAI and is for educational purposes only.
@@ -783,6 +702,7 @@ This project demonstrates:
 - ✅ Attention to UI/UX details
 
 The implementation delivers a fully functional, production-ready GitHub profile clone with comprehensive API integration, modern development practices, and pixel-perfect design accuracy.
+
 
 
 
