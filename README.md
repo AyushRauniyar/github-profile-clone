@@ -94,7 +94,7 @@ This project is a complete implementation of a GitHub profile page as an Angular
           ... on Repository {
             name, description, url, forkCount, stargazerCount
             primaryLanguage { name, color }
-            isPrivate, updatedAt
+            isPrivate, updatedAt, isFork, parent { nameWithOwner }
           }
         }
       }
@@ -102,16 +102,20 @@ This project is a complete implementation of a GitHub profile page as an Angular
   }
   ```
 - **Features**:
-  - Repository name with clickable link
+  - **Clickable Repository Name**: Opens repository in new tab
   - **Visibility Badge**: Public/Private indicator styled as GitHub labels
-  - Fork information (displays "Forked from {owner}/{repo}" if applicable)
-  - Repository description
-  - Primary language with color-coded dot indicator
-  - Star count with icon
-  - Last updated timestamp
+  - **Fork Information**: 
+    - Displays "Forked from {owner}/{repo}" if repository is a fork
+    - Fork source is clickable and underlined (links to parent repository)
+    - Uses consistent gray color matching GitHub's design
+  - Repository description with word wrapping
+  - **Primary Language Badge**: Color-coded dot indicator with language name
+  - **Star Count**: GitHub-style star icon with count
+  - **Last Updated**: Timestamp formatted as medium date
   - Maximum 6 pinned repositories displayed
-  - "Customize your pins" link (routes to maintenance page)
-- Responsive grid layout (2 columns desktop, 1 column mobile)
+  - **"Customize your pins" link**: Routes to maintenance page
+  - Responsive grid layout (2 columns desktop, 1 column mobile)
+  - Hover effects on clickable elements
 
 ### 4. **Contribution Graph (Interactive Heatmap)**
 - **API Integration**: **GitHub GraphQL API** for real-time contribution data
@@ -331,56 +335,70 @@ All endpoints proxy requests to GitHub's GraphQL API with proper authentication 
 
 ```
 github-assignment/
-├── src/
-│   ├── app/
-│   │   ├── header/                     # Header component
-│   │   │   ├── header.component.ts
-│   │   │   ├── header.component.html
-│   │   │   └── header.component.css
-│   │   ├── profile-sidebar/            # Left sidebar (user info)
-│   │   │   ├── profile-sidebar.component.ts
-│   │   │   ├── profile-sidebar.component.html
-│   │   │   └── profile-sidebar.component.css
-│   │   ├── profile-main/               # Main content area
-│   │   │   ├── profile-main.component.ts
-│   │   │   ├── profile-main.component.html
-│   │   │   └── profile-main.component.css
-│   │   ├── profile-tabs/               # Tab navigation
-│   │   │   ├── profile-tabs.component.ts
-│   │   │   ├── profile-tabs.component.html
-│   │   │   └── profile-tabs.component.css
-│   │   ├── profile-container/          # Container component
-│   │   │   └── profile-container.component.ts
-│   │   ├── maintenance/                # Under maintenance page
-│   │   │   └── maintenance.component.ts
-│   │   ├── footer/                     # Footer component
-│   │   │   ├── footer.component.ts
-│   │   │   ├── footer.component.html
-│   │   │   └── footer.component.css
-│   │   ├── site-menu/                  # Hamburger menu
-│   │   │   ├── site-menu.component.ts
-│   │   │   ├── site-menu.component.html
-│   │   │   └── site-menu.component.css
-│   │   ├── services/                   # Angular services
-│   │   │   ├── user.service.ts
-│   │   │   ├── menu.service.ts
-│   │   │   ├── activity-overview.service.ts
-│   │   │   └── profile-counts.service.ts
-│   │   ├── contributions.service.ts    # Contributions service
-│   │   ├── app.component.ts
-│   │   ├── app.component.html
-│   │   ├── app.component.css
-│   │   ├── app.module.ts
-│   │   └── app-routing.module.ts
-│   ├── styles.css                      # Global styles
-│   ├── index.html
-│   └── main.ts
-├── server.js                           # Node.js proxy server
-├── proxy.conf.json                     # Angular proxy config
-├── package.json
-├── angular.json
-├── tsconfig.json
-└── README.md
+├── frontend/                            # Angular application
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── header/                  # Header component (two-part nav)
+│   │   │   │   ├── header.component.ts
+│   │   │   │   ├── header.component.html
+│   │   │   │   └── header.component.css
+│   │   │   ├── profile-sidebar/         # Left sidebar (user info)
+│   │   │   │   ├── profile-sidebar.component.ts
+│   │   │   │   ├── profile-sidebar.component.html
+│   │   │   │   └── profile-sidebar.component.css
+│   │   │   ├── profile-main/            # Main content area
+│   │   │   │   ├── profile-main.component.ts
+│   │   │   │   ├── profile-main.component.html
+│   │   │   │   └── profile-main.component.css
+│   │   │   ├── profile-tabs/            # Tab navigation
+│   │   │   │   ├── profile-tabs.component.ts
+│   │   │   │   ├── profile-tabs.component.html
+│   │   │   │   └── profile-tabs.component.css
+│   │   │   ├── profile-container/       # Container component
+│   │   │   │   └── profile-container.component.ts
+│   │   │   ├── maintenance/             # Under maintenance page
+│   │   │   │   └── maintenance.component.ts
+│   │   │   ├── footer/                  # Footer component
+│   │   │   │   ├── footer.component.ts
+│   │   │   │   ├── footer.component.html
+│   │   │   │   └── footer.component.css
+│   │   │   ├── site-menu/               # Hamburger menu
+│   │   │   │   ├── site-menu.component.ts
+│   │   │   │   ├── site-menu.component.html
+│   │   │   │   └── site-menu.component.css
+│   │   │   ├── services/                # Angular services
+│   │   │   │   ├── user.service.ts      # User state management
+│   │   │   │   ├── menu.service.ts      # Menu state management
+│   │   │   │   ├── activity-overview.service.ts  # Activity data
+│   │   │   │   └── profile-counts.service.ts     # Tab counts
+│   │   │   ├── contributions.service.ts # Contributions & pinned repos
+│   │   │   ├── app.component.ts
+│   │   │   ├── app.component.html
+│   │   │   ├── app.component.css
+│   │   │   ├── app.module.ts
+│   │   │   └── app-routing.module.ts
+│   │   ├── environments/                # Environment configs
+│   │   │   ├── environment.ts           # Development config
+│   │   │   └── environment.prod.ts      # Production config
+│   │   ├── assets/                      # Static assets
+│   │   ├── styles.css                   # Global styles
+│   │   ├── index.html
+│   │   └── main.ts
+│   ├── angular.json                     # Angular CLI config
+│   ├── package.json                     # Frontend dependencies
+│   ├── tsconfig.json                    # TypeScript config
+│   ├── proxy.conf.json                  # Dev proxy config
+│   └── vercel.json                      # Frontend deployment config
+│
+├── backend/                             # Node.js API server
+│   ├── server.js                        # Express server with GraphQL proxy
+│   ├── package.json                     # Backend dependencies
+│   ├── .env                             # Environment variables (gitignored)
+│   └── vercel.json                      # Backend deployment config
+│
+├── .gitignore                           # Git ignore rules
+├── README.md                            # This file
+└── DEPLOYMENT.md                        # Deployment guide
 ```
 
 ---
@@ -395,42 +413,60 @@ github-assignment/
 
 ### Step 1: Clone the Repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/AyushRauniyar/github-profile-clone.git
 cd github-assignment
 ```
 
-### Step 2: Install Dependencies
+### Step 2: Install Frontend Dependencies
 ```bash
+cd frontend
 npm install
+cd ..
 ```
 
-### Step 3: Configure GitHub Token
-Create a `.env` file in the root directory:
+### Step 3: Install Backend Dependencies
+```bash
+cd backend
+npm install
+cd ..
+```
+
+### Step 4: Configure GitHub Token
+Create a `.env` file in the `backend/` directory:
 ```
 GITHUB_TOKEN=your_github_personal_access_token_here
 ```
 
 **How to get a GitHub token:**
 1. Go to GitHub Settings → Developer settings → Personal access tokens
-2. Generate new token (classic)
+2. Click "Generate new token (classic)"
 3. Select scopes: `read:user`, `repo`, `read:org`
-4. Copy the token and paste it in `.env`
+4. Copy the token and paste it in `backend/.env`
 
-### Step 4: Start the Backend Server
+### Step 5: Start the Backend Server
 ```bash
+cd backend
 node server.js
 ```
 Server will start on `http://localhost:3000`
 
-### Step 5: Start the Angular Development Server
+### Step 6: Start the Angular Development Server
 In a new terminal:
 ```bash
+cd frontend
 ng serve --proxy-config proxy.conf.json
 ```
 Application will be available at `http://localhost:4200`
 
-### Step 6: Access the Application
+### Step 7: Access the Application
 Navigate to `http://localhost:4200/AyushRauniyar` (or any GitHub username)
+
+### 🌐 Live Deployment
+The application is also deployed and accessible at:
+- **Frontend**: https://github-profile-frontend.vercel.app
+- **Backend API**: https://github-profile-backend.vercel.app
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
 
 ---
 
@@ -439,48 +475,91 @@ Navigate to `http://localhost:4200/AyushRauniyar` (or any GitHub username)
 Beyond the assignment requirements, the following features were implemented:
 
 ### 1. **Activity Overview Section**
-- Spider chart visualization of contribution types
-- Activity mix percentage calculation
-- Repository contribution tracking with detailed metrics
-- Dynamic data fetching and visualization
+- **Spider/Radar Chart**: SVG-based visualization of contribution types
+- **Dynamic Data**: Updates automatically when year changes
+- Activity mix percentage calculation with real-time updates
+- Repository contribution tracking with detailed metrics (commits, PRs, issues, reviews)
+- **Show More/Show Less**: Expandable list of contributed repositories
+- Year-synchronized updates across all activity components
 
 ### 2. **Dynamic Profile Tab Counts**
 - Real-time fetching of repository, project, package, and star counts
-- Uses GitHub's latest ProjectsV2 API (migrated from deprecated Projects Classic)
-- Conditional rendering (badges hidden when count is 0)
+- **ProjectsV2 API Migration**: Uses GitHub's latest API (migrated from deprecated Projects Classic)
+- Conditional rendering: badges automatically hidden when count is 0
+- Live count updates from GraphQL queries
+- Proper error handling with fallback values
 
 ### 3. **Enhanced Repository Cards**
-- Visibility badges (Public/Private)
-- Fork information display
-- Language indicators with correct colors
-- Star counts and last updated timestamps
+- **Interactive Elements**:
+  - Clickable repository names (open in new tab)
+  - Clickable fork source links with underline styling
+  - Hover effects with opacity transitions
+- Visibility badges (Public/Private) with GitHub-accurate styling
+- Fork information with source repository links
+- Language indicators with accurate GitHub language colors
+- Star counts with icon
+- Last updated timestamps with date formatting
+- Responsive card layout with equal heights
 
 ### 4. **Navigation Enhancements**
-- Dynamic username routing
-- Query parameter-based tab switching
-- Maintenance component for under-development features
-- "Customize your pins" functionality
+- Dynamic username routing with URL parameters
+- Query parameter-based tab switching (`?tab=repositories`)
+- **Maintenance Component**: Graceful handling of under-development features
+- "Customize your pins" functionality with routing
+- Breadcrumb navigation with active states
+- Mobile-friendly hamburger menu
 
 ### 5. **Full Header Implementation**
-- Copilot dropdown menu
-- Create new items dropdown
-- All dropdown items route to maintenance page
-- Search bar (UI complete, can be extended)
+- **Two-part navigation structure**:
+  - Main navigation bar with search and action buttons
+  - Profile header with tabs and user info
+- **Copilot Dropdown**: Multi-option menu with maintenance routing
+- **Create Dropdown**: New repository, import, codespace options
+- All dropdown items properly route to maintenance page
+- Search bar with GitHub-style placeholder (UI complete)
+- Icon tray with notification indicators
 
 ### 6. **Footer Component**
-- GitHub-authentic footer design
-- Responsive layout with proper breakpoints
-- Sticky positioning for better UX
+- GitHub-authentic footer design with official logo
+- **Multi-column layout**: Responsive grid that stacks on mobile
+- Navigation links organized by category
+- Cookie management section
+- Copyright information with dynamic year calculation
+- **Sticky positioning**: Stays at bottom of viewport on short pages
+- Hover effects on links
 
 ### 7. **State Management**
-- RxJS-based reactive state management
-- BehaviorSubject for username sharing across components
-- Proper cleanup with takeUntil pattern
+- **RxJS-based reactive architecture**:
+  - BehaviorSubject for username sharing across components
+  - Observables for asynchronous data flow
+  - Proper cleanup with takeUntil pattern to prevent memory leaks
+- Centralized UserService for state management
+- MenuService for dropdown state coordination
+- Reactive updates across all components
 
-### 8. **Error Handling**
+### 8. **Error Handling & User Experience**
 - Graceful error handling for API failures
+- Loading states for asynchronous operations
 - Console logging for debugging
 - Fallback values for missing data
+- User-friendly error messages
+- Null/undefined safety checks throughout
+
+### 9. **Code Quality & Architecture**
+- **Component-based architecture**: Modular, reusable components
+- **Service layer**: Separation of concerns with dedicated services
+- **TypeScript interfaces**: Type safety for all data structures
+- **Environment configuration**: Separate dev/prod configurations
+- **Proxy configuration**: Development proxy for API calls
+- Clean, maintainable code with proper comments
+
+### 10. **Deployment Ready**
+- **Separate frontend/backend structure**: Clean deployment architecture
+- **Environment variables**: Secure token management
+- **CORS configuration**: Proper cross-origin request handling
+- **Vercel configuration**: Optimized for serverless deployment
+- **ES Module support**: Modern JavaScript module system
+- Production build optimization
 
 ---
 
@@ -710,4 +789,3 @@ This project demonstrates:
 - **Pure CSS**: No UI frameworks, GitHub-accurate styling
 
 The implementation delivers a fully functional, production-ready GitHub profile clone with comprehensive API integration, modern development practices, and pixel-perfect design accuracy.
-
