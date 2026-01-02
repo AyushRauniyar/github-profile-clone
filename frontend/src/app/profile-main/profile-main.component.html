@@ -7,11 +7,13 @@
   <div class="repos-grid">
     <div class="repo-card" *ngFor="let repo of pinnedRepos">
       <div class="repo-title-row">
-        <div class="repo-title">{{ repo.name }}</div>
+        <a [href]="repo.url" target="_blank" class="repo-title-link">
+          <div class="repo-title">{{ repo.name }}</div>
+        </a>
         <span class="repo-visibility-badge">{{ repo.isPrivate ? 'Private' : 'Public' }}</span>
       </div>
       <div class="repo-fork-info" *ngIf="repo.isFork && repo.parentNameWithOwner">
-        Forked from {{ repo.parentNameWithOwner }}
+        Forked from <a [href]="'https://github.com/' + repo.parentNameWithOwner" target="_blank" class="fork-link">{{ repo.parentNameWithOwner }}</a>
       </div>
       <div class="repo-desc">{{ repo.description }}</div>
       <div class="repo-meta">
@@ -293,3 +295,4 @@
   </div>
   <button class="show-more-btn">Show more activity</button> 
 </section>-->
+
