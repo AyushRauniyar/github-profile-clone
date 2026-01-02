@@ -90,7 +90,6 @@ You can view any GitHub user's profile by changing the username in the URL, for 
   - Personal website URL
   - Twitter/X username with link
   - Follower and following counts
-- **Organization Affiliations**: Avatar grid of organizations the user belongs to
 - Fully responsive layout that adapts to mobile screens
 
 ### 3. **Profile Main Content**
@@ -148,7 +147,7 @@ You can view any GitHub user's profile by changing the username in the URL, for 
   - **When year changes, the contribution grid automatically updates** with new data for that year
   - Total contribution count recalculates dynamically
 - **Interactive Features**:
-  - SVG-based heatmap visualization (53 weeks × 7 days)
+  - SVG-based heatmap visualization (53 weeks × 7 days), which changes dynamically when year changes.
   - Color-coded cells with 5 contribution levels:
     - Level 0 (None): `#ebedf0`
     - Level 1 (Low): `#9be9a8`
@@ -695,6 +694,7 @@ This project demonstrates:
 - ✅ Attention to UI/UX details
 
 The implementation delivers a fully functional, production-ready GitHub profile clone with comprehensive API integration, modern development practices, and pixel-perfect design accuracy.
+
 
 
 
