@@ -236,7 +236,7 @@
   word-break: break-word;
 }
 
-fork-link {
+.fork-link {
   /* typography */
   color: #57606a;
   text-decoration: underline;
@@ -1238,5 +1238,6 @@ fork-link {
   .activity-icon { width: 20px; height: 20px; }
   .TimelineItem:before { left: 9px; width: 2px; }
 }
+
 
 
