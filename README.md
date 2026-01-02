@@ -300,8 +300,6 @@ You can view any GitHub user's profile by changing the username in the URL, for 
 
 ---
 
----
-
 ## 🔌 API Integration vs Mock Data
 
 ### ✅ **Real-Time API Integration**
@@ -545,18 +543,12 @@ Beyond the assignment requirements, the following features were implemented:
 ## 📸 Screenshots
 
 ### Desktop View
+<img width="1427" height="860" alt="image" src="https://github.com/user-attachments/assets/a45cb0e0-74fa-49a9-ac04-72c6816b7522" />
+<img width="1427" height="860" alt="image" src="https://github.com/user-attachments/assets/b947b431-6154-4df6-83b8-16c1f559860b" />
+
 - Full profile page with sidebar, main content, and footer
 - Contribution heatmap with hover interactions
 - Activity overview with spider chart
-
-### Tablet View (768px)
-- Responsive grid layouts
-- Adjusted spacing and sizing
-
-### Mobile View (544px)
-- Single column layout
-- Hamburger menu navigation
-- Touch-optimized interface
 
 ---
 
@@ -702,6 +694,7 @@ This project demonstrates:
 - ✅ Attention to UI/UX details
 
 The implementation delivers a fully functional, production-ready GitHub profile clone with comprehensive API integration, modern development practices, and pixel-perfect design accuracy.
+
 
 
 
