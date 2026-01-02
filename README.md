@@ -95,7 +95,7 @@ You can view any GitHub user's profile by changing the username in the URL, for 
 
 ### 3. **Profile Main Content**
 
-#### Pinned Repositories Section
+#### Popular Repositories Section
 - **100% Dynamic - No Mock Data**
 - **API Integration**: Fetched using **GitHub GraphQL API**
   ```graphql
@@ -312,7 +312,7 @@ This implementation uses **GitHub's official APIs** for nearly all data, ensurin
 |---------|-------------|----------|-----------|
 | **User Profile** | GitHub REST API | `GET /users/{username}` | ❌ No |
 | **Contribution Heatmap** ✅ | GitHub GraphQL API | `contributionsCollection` query | ❌ No |
-| **Pinned Repositories** | GitHub GraphQL API | `pinnedItems` query | ❌ No |
+| **Popular Repositories** | GitHub GraphQL API | `pinnedItems` query | ❌ No |
 | **Activity Overview (Spider Chart)** | GitHub GraphQL API | `contributionsCollection` (commits, PRs, issues, reviews) | ❌ No |
 | **Activity Mix Percentages** | GitHub GraphQL API | Calculated from `contributionsCollection` | ❌ No |
 | **Contributed Repositories** | GitHub GraphQL API | `commitContributionsByRepository` | ❌ No |
@@ -477,8 +477,6 @@ Navigate to `http://localhost:4200/AyushRauniyar` (or any GitHub username)
 The application is also deployed and accessible at:
 - **Frontend**: https://github-profile-frontend.vercel.app
 - **Backend API**: https://github-profile-backend.vercel.app
-
-See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
 
 ---
 
@@ -760,14 +758,6 @@ This project is created as an assignment for UptimeAI and is for educational pur
 
 ---
 
-## 🙏 Acknowledgments
-
-- **GitHub**: For comprehensive API documentation
-- **Angular**: For the robust framework
-- **UptimeAI**: For the assignment opportunity
-
----
-
 ## 📧 Contact
 
 For any questions or clarifications about this implementation, please contact the developer.
@@ -775,9 +765,8 @@ For any questions or clarifications about this implementation, please contact th
 ---
 
 **Assignment Submitted By**: Ayush Rauniyar  
-**Date**: January 2, 2026  
+**Mobile Number**: 9129489002  
 **Assignment**: GitHub Profile Page - Angular Implementation  
-**Organization**: UptimeAI
 
 ---
 
@@ -793,14 +782,8 @@ This project demonstrates:
 - ✅ Backend development with Node.js/Express
 - ✅ Attention to UI/UX details
 
-**Key Statistics**: 
-- **9 Major Components**: Header (2 parts), Profile Sidebar, Profile Main, Contribution Graph, Activity Overview, Profile Tabs, Footer, Maintenance
-- **6 API Endpoints**: All proxying to GitHub GraphQL API
-- **95%+ API Integration**: Only activity timeline uses mock data (temporary)
-- **100% Responsive**: Works seamlessly on desktop, tablet, and mobile
-- **Pure CSS**: No UI frameworks, GitHub-accurate styling
-
 The implementation delivers a fully functional, production-ready GitHub profile clone with comprehensive API integration, modern development practices, and pixel-perfect design accuracy.
+
 
 
 
