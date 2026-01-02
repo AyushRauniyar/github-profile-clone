@@ -37,7 +37,7 @@ app-root {
 .profile-container {
 	max-width: 1216px;
 	margin: 8px auto 0 auto;
-	padding: 32px;
+	padding: 32px 32px 0px 32px;
 	display: grid;
 	grid-template-columns: 296px 1fr;
 	gap: 24px;
@@ -84,3 +84,4 @@ app-root {
 		box-sizing: border-box;
 	}
 }
+
