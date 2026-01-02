@@ -30,14 +30,13 @@ This project is a complete implementation of a GitHub profile page as an Angular
 - **State Management**: RxJS-based reactive state management
 - **Modern UI/UX**: GitHub-style interface with attention to detail
 
----
+--
 
 
 **Test with Different GitHub Users:**
 You can view any GitHub user's profile by changing the username in the URL:
-- `https://github-profile-frontend.vercel.app/AyushRauniyar`
-- `https://github-profile-frontend.vercel.app/shreeramk`
-- `https://github-profile-frontend.vercel.app/octocat`
+- `[https://github-profile-frontend.vercel.app/AyushRauniyar](https://github-profile-frontend.vercel.app/AyushRauniyar)`
+- `[https://github-profile-frontend.vercel.app/shreeramk](https://github-profile-frontend.vercel.app/shreeramk)`
 - Or any valid GitHub username: `https://github-profile-frontend.vercel.app/{username}`
 
 ---
@@ -800,6 +799,7 @@ This project demonstrates:
 - **Pure CSS**: No UI frameworks, GitHub-accurate styling
 
 The implementation delivers a fully functional, production-ready GitHub profile clone with comprehensive API integration, modern development practices, and pixel-perfect design accuracy.
+
 
 
 
