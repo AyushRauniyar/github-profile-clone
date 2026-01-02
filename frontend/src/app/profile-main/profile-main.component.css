@@ -177,6 +177,21 @@
   min-width: 0;
 }
 
+.repo-title-link {
+  /* layout */
+  flex: 1;
+  min-width: 0;
+  /* reset link styles */
+  text-decoration: none;
+  cursor: pointer;
+  /* behavior */
+  transition: opacity 0.2s;
+}
+
+.repo-title-link:hover {
+  opacity: 0.7;
+}
+
 .repo-title {
   /* layout */
   flex: 1;
@@ -219,6 +234,18 @@
   /* behavior */
   overflow-wrap: anywhere;
   word-break: break-word;
+}
+
+fork-link {
+  /* typography */
+  color: #57606a;
+  text-decoration: underline;
+  /* behavior */
+  cursor: pointer;
+}
+
+.fork-link:hover {
+  opacity: 0.7;
 }
 
 .repo-desc {
@@ -1211,4 +1238,5 @@
   .activity-icon { width: 20px; height: 20px; }
   .TimelineItem:before { left: 9px; width: 2px; }
 }
+
 
