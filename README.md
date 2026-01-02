@@ -544,7 +544,8 @@ Beyond the assignment requirements, the following features were implemented:
 
 ### Desktop View
 <img width="1427" height="860" alt="image" src="https://github.com/user-attachments/assets/a45cb0e0-74fa-49a9-ac04-72c6816b7522" />
-<img width="1427" height="860" alt="image" src="https://github.com/user-attachments/assets/b947b431-6154-4df6-83b8-16c1f559860b" />
+
+<img width="1436" height="848" alt="Screenshot 2026-01-02 at 1 06 39 PM" src="https://github.com/user-attachments/assets/11d9847b-65f1-4ab0-9bca-9b8836766a64" />
 
 - Full profile page with sidebar, main content, and footer
 - Contribution heatmap with hover interactions
@@ -694,6 +695,7 @@ This project demonstrates:
 - ✅ Attention to UI/UX details
 
 The implementation delivers a fully functional, production-ready GitHub profile clone with comprehensive API integration, modern development practices, and pixel-perfect design accuracy.
+
 
 
 
