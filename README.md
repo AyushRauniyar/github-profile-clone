@@ -32,15 +32,13 @@ This project is a complete implementation of a GitHub profile page as an Angular
 
 **🌐 Live Application:**
 - **Frontend**: https://github-profile-frontend.vercel.app
-- **Backend API**: https://github-profile-backend.vercel.app
+- **Backend API**: https://github-profile-backend.vercel.app ( Test on this query: https://github-profile-backend.vercel.app/api/profile?login=AyushRauniyar) 
 - **Test with any GitHub user**: `https://github-profile-frontend.vercel.app/{username}`
---
-
 
 **Test with Different GitHub Users:**
-You can view any GitHub user's profile by changing the username in the URL:
+You can view any GitHub user's profile by changing the username in the URL, for example:
 - https://github-profile-frontend.vercel.app/shreeramk
-- `https://github-profile-frontend.vercel.app/AyushRauniyar`
+- https://github-profile-frontend.vercel.app/AyushRauniyar
 - Or any valid GitHub username: `https://github-profile-frontend.vercel.app/{username}`
 
 ---
@@ -803,6 +801,7 @@ This project demonstrates:
 - **Pure CSS**: No UI frameworks, GitHub-accurate styling
 
 The implementation delivers a fully functional, production-ready GitHub profile clone with comprehensive API integration, modern development practices, and pixel-perfect design accuracy.
+
 
 
 
