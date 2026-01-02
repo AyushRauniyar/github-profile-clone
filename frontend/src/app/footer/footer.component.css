@@ -1,6 +1,6 @@
 /* Footer container */
 .footer {
-  /* padding: 40px 16px 24px; */
+  padding: 48px 16px;
   font-size: 12px;
   color: #656d76;
   background: #fff;
@@ -158,3 +158,4 @@
     height: 20px;
   }
 }
+
